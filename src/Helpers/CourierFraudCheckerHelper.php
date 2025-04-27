@@ -36,7 +36,7 @@ class CourierFraudCheckerHelper
         [
             'phone' => [
                 'required',
-                'regex:/^(\+8801(3|4|5|6|7|8|9)|01(3|4|5|6|7|8|9))[0-9]{7}$/'
+                'regex:/^01[3-9][0-9]{8}$/'
             ]
         ],
         [
