@@ -2,11 +2,19 @@
 
 namespace ShahariarAhmad\CourierFraudCheckerBd\Services;
 use Illuminate\Support\Facades\Http;
+use ShahariarAhmad\CourierFraudCheckerBd\Helpers\CourierFraudCheckerHelper;
 
 class PathaoService
 {
+    public function __construct()
+    {
+        // Reusable check for required environment variables
+        CourierFraudCheckerHelper::checkRequiredEnv(['PATHAO_USER', 'PATHAO_PASSWORD']);
+    }
     public function pathao($phoneNumber)
     {
+        CourierFraudCheckerHelper::validatePhoneNumber($phoneNumber);
+
         $response = Http::post('https://merchant.pathao.com/api/v1/login', [
             'username' => env('PATHAO_USER'),
             'password' => env('PATHAO_PASSWORD'),

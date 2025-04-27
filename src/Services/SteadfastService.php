@@ -2,11 +2,18 @@
 
 namespace ShahariarAhmad\CourierFraudCheckerBd\Services;
 use Illuminate\Support\Facades\Http;
+use ShahariarAhmad\CourierFraudCheckerBd\Helpers\CourierFraudCheckerHelper;
 
 class SteadfastService
 {
+    public function __construct()
+    {
+        // Reusable check for required environment variables
+        CourierFraudCheckerHelper::checkRequiredEnv(['STEADFAST_USER', 'STEADFAST_PASSWORD']);
+    }
     public function steadfast($phoneNumber)
     {
+        CourierFraudCheckerHelper::validatePhoneNumber($phoneNumber);
         $email = env('STEADFAST_USER');
         $password = env('STEADFAST_PASSWORD');
 
